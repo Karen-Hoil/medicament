@@ -1,3 +1,13 @@
+.body{
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	font-family: 'Jost', sans-serif;
+
+}
 .main{
 	width: 350px;
 	height: 500px;
@@ -66,6 +76,8 @@ button:hover{
 }
 .login label{
 	color: #573b8a;
+	font-size: 40px;
+	text-align: center;
 	transform: scale(.6);
 }
 
