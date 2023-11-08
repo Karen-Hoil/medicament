@@ -1,6 +1,8 @@
+import Axios from "axios";
 import React from "react";
 
 function Formulario(){
+  
     return(
         <>
   <div className="mb-3">
@@ -29,23 +31,7 @@ function Formulario(){
         className="form-control"
         placeholder="cada cuanto se toma"
       />
-      <select
-        name="momento"
-        id="momento"
-        style={{
-          width: 300,
-          marginLeft: 20,
-          borderRadius: 5,
-          borderColor: "rgb(192, 192, 192)",
-          paddingLeft: 5
-        }}
-      >
-        <option value="tiempo">Elige una opción</option>
-        <option value="tiempo">Minutos</option>
-        <option value="tiempo">Horas</option>
-        <option value="tiempo">Días</option>
-        <option value="tiempo">Meses</option>
-      </select>
+      
     </div>
   </div>
   <div className="mb-3">
