@@ -22,7 +22,7 @@ function Login() {
       contraseña: contraseña
     })
     if (response.data.status){
-      window.location.href= "/home"
+      window.location.href= "/cuadro"
     }else{
       console.log("usuario o contraseña erroneas")
     }

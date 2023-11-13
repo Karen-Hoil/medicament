@@ -6,8 +6,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import './css/login.css';
 import './css/tabs.css';
 import './css/cards.css';
+import './css/medicamentos.css';
+import './css/menu.css';
 import Login from './page/login';
 import Home from './page/home';
+import Cuadro from './page/cuadro';
+import Formulario from './components/formulario';
+import Medicamentos from './components/madicamentos';
+import MedicationTable from './components/chat';
 
 function App() {
   const router = createBrowserRouter([
@@ -19,6 +25,22 @@ function App() {
       path:'/',
       element: <Login/>
     },
+    {
+      path:'/cuadro',
+      element: <Cuadro/>
+    },
+    {
+      path:'/formulario',
+      element: <Formulario/>
+    },
+    {
+      path: '/medicamentos',
+      element: <Medicamentos/>
+    },
+    {
+      path:"/chat",
+      element:<MedicationTable/>
+    }
   ])
   return (
     <>

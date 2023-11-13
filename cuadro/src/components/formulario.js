@@ -1,26 +1,56 @@
+import {useState} from "react";
+import Home from "../page/home";
 import Axios from "axios";
-import React from "react";
+
 
 function Formulario(){
-  
+  const [medicamento, setMedicamento] = useState('');
+  const [dosis, setDosis] = useState('');
+  const [comentarios, setComentarios] = useState('');
+  const [toma, setToma] = useState('')
+  const fechaMySQL = new Date().toISOString().slice(0, 10);
+
+  const agregarMedicamento = (e) =>{
+    e.preventDefault();
+    Axios.post('http://localhost:3001/medicina',{
+      nombreMedicina: medicamento,
+      dosis: dosis,
+      toma: toma,
+      hora: new Date().toLocaleTimeString('es-ES'),
+      fecha: fechaMySQL, 
+      comentarios: comentarios
+    }).then(()=>{
+      console.log("Medicamento agregado")
+    })
+    setMedicamento('');
+    setDosis('');
+    setToma('');
+    setComentarios('');
+  }
     return(
         <>
-  <div className="mb-3">
+        <Home/>
+        <div style={{marginTop: 130, marginLeft:50, marginRight:50}}>
+          <h1 style={{marginBottom:20}}>Agregar nuevo medicamento</h1>
+          <form onSubmit={agregarMedicamento}>
+          <div className="mb-3">
     <label className="form-label">Medicamento:</label>
     <input
       type="text"
+      value={medicamento}
+      onChange={(e) => setMedicamento(e.target.value)}
       className="form-control"
       placeholder="Ingresar medicamento"
-      style={{ width: 1190 }}
     />
   </div>
   <div className="mb-3">
     <label className="form-label">Dosis:</label>
     <input
-      type="text"
+      type="number"
+      value={dosis}
+      onChange={(e) => setDosis(e.target.value)}
       className="form-control"
       placeholder="Ingresar dosis"
-      style={{ width: 1190 }}
     />
   </div>
   <div className="mb-3">
@@ -28,6 +58,8 @@ function Formulario(){
     <div style={{ display: "flex" }}>
       <input
         type="number"
+        value={toma}
+        onChange={(e) => setToma(e.target.value)}
         className="form-control"
         placeholder="cada cuanto se toma"
       />
@@ -35,28 +67,12 @@ function Formulario(){
     </div>
   </div>
   <div className="mb-3">
-    <label className="form-label" style={{marginRight:10}}>Horario de inicio</label>
-    <select
-      name="inicio"
-      id="inicio"
-      style={{
-        width: 200,
-        height: 40,
-        borderRadius: 5,
-        borderColor: "rgb(192, 192, 192)",
-        paddingLeft: 5
-      }}
-    >
-      <option value="tiempo">Elige una opción</option>
-      <option value="tiempo">Mañana</option>
-      <option value="tiempo">Mediodía</option>
-      <option value="tiempo">Tardes</option>
-      <option value="tiempo">Noches</option>
-    </select>
-  </div>
-  <div className="mb-3">
     <label className="form-label">Comentario:</label>
-    <input type="text" className="form-control" placeholder="Opcional" />
+    <input type="text" className="form-control" placeholder="Opcional" value={comentarios} onChange={(e) => setComentarios(e.target.value)}/>
+  </div>
+  <button type="submit">Agregar Medicamento</button>
+          </form>
+  
   </div>
 </>
     )

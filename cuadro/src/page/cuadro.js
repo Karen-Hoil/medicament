@@ -1,8 +1,28 @@
-import React from "react";
+import {useState, useEffect} from "react";
+import Home from "./home";
+import Medicamentos from "../components/madicamentos";
+import { useLocation } from "react-router-dom";
+import Axios from "axios";
 
 function Cuadro(){
+  const [medicina,setMedicina] =useState([]);
+
+    
+    useEffect(()=>{
+        Axios.get(`http://localhost:3001/medicina`)
+        .then(respuesta=>{
+            setMedicina(respuesta.data.listamedicina);
+            
+        })
+        .catch(error=> console.error(error));
+    },[])
     return(
         <>
+        <Home/>
+        <div style={{marginTop:130, marginLeft:50, marginRight:50, marginBottom:50}}>
+        <h1 style={{marginBottom:50}}>Control de medicamentos</h1>
+        <Medicamentos/>
+        <div style={{marginTop:160, marginLeft:50, marginRight:50, marginBottom:50}}>
         <table>
   <tbody>
     <tr>
@@ -14,8 +34,8 @@ function Cuadro(){
       <th>Comentario</th>
     </tr>
     <tr>
-      <td style={{ border: "rgba(0, 0, 0, 0)", width: 50, paddingTop: 0 }}>
-        <figure style={{ backgroundColor: "rgb(253, 153, 153)" }}>
+      <th style={{ border: "rgba(0, 0, 0, 0)", width: 50, paddingTop: 0 }}>
+      <figure style={{ backgroundColor: "rgb(253, 153, 153)" }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
@@ -48,53 +68,59 @@ function Cuadro(){
           </svg>
           <figcaption>Mañana</figcaption>
         </figure>
+
+      </th>
+      
+        <td>
+          {medicina.map((medicamento)=>(
+            <div style={{
+              backgroundColor: "rgb(248, 218, 216)",
+              marginBottom: 2,
+              padding: 8
+            }}>{medicamento.nombreMedicina}</div>
+          ))}
+        
       </td>
       <td>
-        <div
-          style={{
-            backgroundColor: "rgb(248, 218, 216)",
-            marginBottom: 2,
-            padding: 8
-          }}
-        />
+      {medicina.map((medicamento)=>(
+            <div style={{
+              backgroundColor: "rgb(248, 218, 216)",
+              marginBottom: 2,
+              padding: 8
+            }}>{medicamento.dosis}</div>
+          ))}
       </td>
       <td>
-        <div
-          style={{
-            backgroundColor: "rgb(248, 218, 216)",
-            marginBottom: 2,
-            padding: 8
-          }}
-        />
+      {medicina.map((medicamento)=>(
+            <div style={{
+              backgroundColor: "rgb(248, 218, 216)",
+              marginBottom: 2,
+              padding: 8
+            }}>{medicamento.hora}</div>
+          ))}
       </td>
       <td>
-        <div
-          style={{
-            backgroundColor: "rgb(248, 218, 216)",
-            marginBottom: 2,
-            padding: 8
-          }}
-        />
+      {medicina.map((medicamento)=>(
+            <div style={{
+              backgroundColor: "rgb(248, 218, 216)",
+              marginBottom: 2,
+              padding: 8
+            }}>{medicamento.fecha}</div>
+          ))}
       </td>
       <td>
-        <div
-          style={{
-            backgroundColor: "rgb(248, 218, 216)",
-            marginBottom: 2,
-            padding: 8
-          }}
-        />
-      </td>
-      <td>
-        <div
-          style={{
-            backgroundColor: "rgb(248, 218, 216)",
-            marginBottom: 2,
-            padding: 8
-          }}
-        />
+      {medicina.map((medicamento)=>(
+            <div style={{
+              backgroundColor: "rgb(248, 218, 216)",
+              marginBottom: 2,
+              padding: 8
+            }}>{medicamento.comentarios}</div>
+          ))}
       </td>
     </tr>
+    
+
+    
     <tr>
       <td>
         <figure style={{ backgroundColor: "rgb(255, 255, 202)" }}>
@@ -466,7 +492,9 @@ function Cuadro(){
     </tr>
   </tbody>
 </table>
+        </div>
 
+</div>
         </>
     )
 }
