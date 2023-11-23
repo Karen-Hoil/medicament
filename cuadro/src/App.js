@@ -13,7 +13,6 @@ import Home from './page/home';
 import Cuadro from './page/cuadro';
 import Formulario from './components/formulario';
 import Medicamentos from './components/madicamentos';
-import MedicationTable from './components/chat';
 
 function App() {
   const router = createBrowserRouter([
@@ -37,10 +36,6 @@ function App() {
       path: '/medicamentos',
       element: <Medicamentos/>
     },
-    {
-      path:"/chat",
-      element:<MedicationTable/>
-    }
   ])
   return (
     <>
